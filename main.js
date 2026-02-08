@@ -54,7 +54,17 @@ d3.csv(dataURL).then(function(data){
       .style("text-anchor", "middle")
       .text("Trip duration end in")
       .attr('transform',"rotate(-90)");
-
+    
+    spl.append("rect") //the rectangle that covers all points
+      .attr("id", "coverRect")
+      .attr("x", 0).attr("y", 0)
+      .attr("width", width_spl).attr("height", height_spl)
+      .style("fill", "#fce703")
+      .style("opacity", 0.5)
+      .style("pointer-events", "none")
+      .style("display", "none") // ✅ 默认隐藏  
+      .raise();      
+  
     drawScatterPlot(spl, getDataByMonth(data, 'May'), xScale_spl, yScale_spl, div, width_spl, height_spl);
 
     const width_bar = viewBox[2] - margin.left - margin.right;

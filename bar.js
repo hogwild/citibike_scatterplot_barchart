@@ -13,21 +13,16 @@ export let drawBarChart = (barChatLayer, data, xScale, yScale, barChartWidth, ba
       .style("stroke-width", 2)
       .on("mouseover", (event, d) => {
         let cl = d3.select(event.target).attr("class").substring(4);
-      d3.select(d3.select(".point."+cl).node().parentNode)
-        .append('rect')
-        .attr('id', 'coverRect')
-        .attr('x', '0')
-        .attr('y', '0')
-        .attr('width', `${barChartWidth}`)
-        .attr('height', `${barChartHeight}`)
-        .style('fill', '#fce703')
-        .style('opacity', 0.9);
-      d3.selectAll("."+cl).style("fill", "red").style("r", 10).raise();
+        // console.log(cl);
+        d3.select("#coverRect").style("display", "block");
+        d3.select(event.target).style("fill", "red");
+        d3.selectAll(".point."+cl).style("fill", "red").attr("r", 10).raise();
       })
       .on('mouseout',(event, d)=>{
         div.style("opacity", 0);
         let cl = d3.select(event.target).attr("class").substring(4);
-        d3.select("#coverRect").remove();
-        d3.selectAll("."+cl).style("fill", "steelblue").style("r", 5);
+        d3.select("#coverRect").style("display", "none");
+        d3.select(event.target).style("fill", "steelblue");
+        d3.selectAll(".point."+cl).style("fill", "steelblue").attr("r", 5).lower();
       });
 }
